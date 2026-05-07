@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 4 - Student Grade Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border: 2px solid #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #999;
+            border-radius: 5px;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 30px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0052a3;
+        }
+
+        .results-section {
+            display: none;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .results-section.show {
+            display: block;
+        }
+
+        .result-item {
+            font-size: 1.1em;
+            margin: 15px 0;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .reset-btn {
+            background-color: #999;
+            margin-top: 20px;
+        }
+
+        .reset-btn:hover {
+            background-color: #777;
+        }
+
+        .error {
+            color: #c62828;
+            background: #ffcdd2;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Result Calculator</h1>
+
+        <!-- Step 1: Input number of subjects -->
+        <div class="input-group">
+            <label for="numSubjects">Enter Number of Subjects:</label>
+            <input 
+                type="number" 
+                id="numSubjects" 
+                min="1" 
+                max="10" 
+                placeholder="Enter number"
+            >
+            <button onclick="calculateResult()">Calculate Result</button>
+            <div class="error" id="error"></div>
+        </div>
+
+        <!-- Step 2: Display results -->
+        <div class="results-section" id="resultsSection">
+            <div class="result-item">
+                Total Marks: <span id="totalMarks">0</span>
+            </div>
+            <div class="result-item">
+                Average Marks: <span id="averageMarks">0</span>
+            </div>
+            <div class="result-item">
+                Grade: <span id="gradeDisplay">-</span>
+            </div>
+            <div class="result-item">
+                Result: <span id="resultStatus">-</span>
+            </div>
+
+            <button class="reset-btn" onclick="reset()">Calculate Again</button>
+        </div>
+    </div>
+
+    <script>
+        // Program starts here
+
+        function calculateResult() {
+            // Step 1: Take number of subjects as input
+            const numSubjectsInput = document.getElementById('numSubjects');
+            const error = document.getElementById('error');
+            error.classList.remove('show');
+            
+            const numSubjects = parseInt(numSubjectsInput.value);
+            
+            // Validation
+            if (isNaN(numSubjects) || numSubjects <= 0 || numSubjects > 10) {
+                error.textContent = 'Please enter a valid number between 1 and 10';
+                error.classList.add('show');
+                return;
+            }
+            
+            // Step 2: Use a loop to enter marks for each subject
+            let marks = [];
+            for (let i = 0; i < numSubjects; i++) {
+                let markValue;
+                // Keep asking until valid input is provided
+                do {
+                    markValue = prompt(`Enter marks for Subject ${i + 1} (0-100):`);
+                    
+                    // If user cancels the prompt
+                    if (markValue === null) {
+                        return;
+                    }
+                    
+                    markValue = parseInt(markValue);
+                } while (isNaN(markValue) || markValue < 0 || markValue > 100);
+                
+                marks.push(markValue);
+            }
+            
+            // Step 3: Calculate total marks using a loop
+            let total = 0;
+            for (let i = 0; i < marks.length; i++) {
+                total += marks[i];
+            }
+            
+            // Step 4: Calculate average marks
+            const average = total / marks.length;
+            
+            // Step 5: Use conditional statements to determine grade
+            let grade, result;
+            
+            if (average >= 90) {
+                grade = 'A+';
+                result = 'PASS';
+            } else if (average >= 80) {
+                grade = 'A';
+                result = 'PASS';
+            } else if (average >= 70) {
+                grade = 'B';
+                result = 'PASS';
+            } else if (average >= 60) {
+                grade = 'C';
+                result = 'PASS';
+            } else if (average >= 50) {
+                grade = 'D';
+                result = 'PASS';
+            } else {
+                grade = 'F';
+                result = 'FAIL';
+            }
+            
+            // Step 6: Display results on the webpage
+            document.getElementById('totalMarks').textContent = total;
+            document.getElementById('averageMarks').textContent = average.toFixed(2);
+            document.getElementById('gradeDisplay').textContent = grade;
+            document.getElementById('resultStatus').textContent = result;
+            
+            // Show results section
+            document.getElementById('resultsSection').classList.add('show');
+        }
+
+        function reset() {
+            // Reset all inputs and sections
+            document.getElementById('numSubjects').value = '';
+            document.getElementById('resultsSection').classList.remove('show');
+            document.getElementById('error').classList.remove('show');
+            document.getElementById('numSubjects').focus();
+        }
+        // Step 7: Program ends here
+    </script>
+</body>
+</html>
