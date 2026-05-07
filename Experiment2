@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 2 - Bootstrap UI Components</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #2c3e50;
+            padding: 1rem 2rem;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5em;
+            color: white !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            margin-left: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #3498db !important;
+        }
+
+        /* Main Content Area */
+        .products-section {
+            background-color: #ecf0f1;
+            padding: 40px 20px;
+            min-height: 500px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: bold;
+            font-size: 2em;
+            color: #2c3e50;
+        }
+
+        /* Card Styles */
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img-top {
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .price-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #2c3e50;
+        }
+
+        .badge {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85em;
+        }
+
+        .badge-new {
+            background-color: #27ae60;
+        }
+
+        .badge-sale {
+            background-color: #e74c3c;
+        }
+
+        .view-details-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .view-details-btn:hover {
+            background-color: #2980b9;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.95em;
+            margin-top: 40px;
+        }
+
+        /* Modal Styles */
+        .modal-header {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .modal-title {
+            font-weight: bold;
+        }
+
+        .btn-close {
+            filter: brightness(0) invert(1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">TechStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Products Section -->
+    <div class="products-section">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="row g-4">
+                <!-- Product Card 1: Laptop -->
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="product-card">
+                        <svg class="card-img-top" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="200" fill="#e0e0e0"/>
+                            <rect x="20" y="20" width="160" height="110" fill="#999" rx="5"/>
+                            <rect x="30" y="30" width="140" height="90" fill="#666"/>
+                            <rect x="20" y="130" width="160" height="30" fill="#999" rx="5"/>
+                            <text x="100" y="105" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Laptop</text>
+                        </svg>
+                        <div class="card-body">
+                            <div class="product-name">Laptop</div>
+                            <div class="product-description">High performance laptop</div>
+                            <div class="price-section">
+                                <span class="product-price">₹50,000</span>
+                                <span class="badge badge-new">New</span>
+                            </div>
+                            <button class="view-details-btn" data-bs-toggle="modal" data-bs-target="#modal1">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2: Mobile -->
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="product-card">
+                        <svg class="card-img-top" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="200" fill="#e0e0e0"/>
+                            <rect x="60" y="20" width="80" height="160" fill="#333" rx="8"/>
+                            <rect x="70" y="30" width="60" height="120" fill="#87ceeb" rx="5"/>
+                            <circle cx="100" cy="160" r="5" fill="#666"/>
+                            <text x="100" y="95" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Mobile</text>
+                        </svg>
+                        <div class="card-body">
+                            <div class="product-name">Mobile</div>
+                            <div class="product-description">Latest smartphone</div>
+                            <div class="price-section">
+                                <span class="product-price">₹30,000</span>
+                                <span class="badge badge-sale">Sale</span>
+                            </div>
+                            <button class="view-details-btn" data-bs-toggle="modal" data-bs-target="#modal2">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3: Headphones -->
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="product-card">
+                        <svg class="card-img-top" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="200" fill="#e0e0e0"/>
+                            <circle cx="70" cy="100" r="30" fill="#999"/>
+                            <circle cx="130" cy="100" r="30" fill="#999"/>
+                            <path d="M 70 60 Q 100 30 130 60" stroke="#999" stroke-width="8" fill="none"/>
+                            <circle cx="70" cy="100" r="20" fill="#666"/>
+                            <circle cx="130" cy="100" r="20" fill="#666"/>
+                            <text x="100" y="155" text-anchor="middle" fill="#666" font-size="14" font-weight="bold">Headphones</text>
+                        </svg>
+                        <div class="card-body">
+                            <div class="product-name">Headphones</div>
+                            <div class="product-description">Noise cancelling</div>
+                            <div class="price-section">
+                                <span class="product-price">₹5,000</span>
+                                <span class="badge badge-new">New</span>
+                            </div>
+                            <button class="view-details-btn" data-bs-toggle="modal" data-bs-target="#modal3">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        © 2026 TechStore | Follow us on social media
+    </footer>
+
+    <!-- Modal 1: Laptop Details -->
+    <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal1Label">Laptop - Product Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Product:</strong> High Performance Laptop</p>
+                    <p><strong>Price:</strong> ₹50,000</p>
+                    <p><strong>Description:</strong> A powerful laptop designed for professionals and gamers. Features include:</p>
+                    <ul>
+                        <li>Intel Core i7 Processor</li>
+                        <li>16GB RAM</li>
+                        <li>512GB SSD Storage</li>
+                        <li>15.6" Full HD Display</li>
+                        <li>NVIDIA Graphics</li>
+                    </ul>
+                    <p><strong>Status:</strong> <span class="badge badge-new">New</span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Mobile Details -->
+    <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modal2Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal2Label">Mobile - Product Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Product:</strong> Latest Smartphone</p>
+                    <p><strong>Price:</strong> ₹30,000 <span class="badge badge-sale">Sale</span></p>
+                    <p><strong>Description:</strong> The latest flagship smartphone with cutting-edge technology:</p>
+                    <ul>
+                        <li>6.7" AMOLED Display</li>
+                        <li>Snapdragon 8 Gen 2</li>
+                        <li>12GB RAM</li>
+                        <li>256GB Storage</li>
+                        <li>Triple Camera Setup</li>
+                        <li>5G Support</li>
+                    </ul>
+                    <p><strong>Status:</strong> <span class="badge badge-sale">Sale</span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Headphones Details -->
+    <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="modal3Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal3Label">Headphones - Product Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Product:</strong> Noise Cancelling Headphones</p>
+                    <p><strong>Price:</strong> ₹5,000</p>
+                    <p><strong>Description:</strong> Premium wireless headphones with advanced noise cancellation:</p>
+                    <ul>
+                        <li>Active Noise Cancellation (ANC)</li>
+                        <li>40-hour Battery Life</li>
+                        <li>Bluetooth 5.0</li>
+                        <li>Touch Controls</li>
+                        <li>Foldable Design</li>
+                        <li>Comfortable Padding</li>
+                    </ul>
+                    <p><strong>Status:</strong> <span class="badge badge-new">New</span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
