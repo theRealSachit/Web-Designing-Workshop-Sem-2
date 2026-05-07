@@ -1,0 +1,274 @@
+java OOP
+
+*BankAccount.class*
+// Abstract class demonstrating Abstraction
+// This class defines the structure for all bank accounts
+
+public abstract class BankAccount {
+    
+    // Private data members - Encapsulation
+    private String accountNumber;
+    private String accountHolderName;
+    private double balance;
+    
+    // Constructor
+    public BankAccount(String accountNumber, String accountHolderName, double initialBalance) {
+        this.accountNumber = accountNumber;
+        this.accountHolderName = accountHolderName;
+        this.balance = initialBalance;
+    }
+    
+    // Getter methods - Encapsulation
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+    
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+    
+    public double getBalance() {
+        return balance;
+    }
+    
+    // Setter methods - Encapsulation
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+    
+    public void setAccountHolderName(String accountHolderName) {
+        this.accountHolderName = accountHolderName;
+    }
+    
+    public void setBalance(double balance) {
+        if (balance >= 0) {
+            this.balance = balance;
+        } else {
+            System.out.println("Balance cannot be negative!");
+        }
+    }
+    
+    // Method to deposit money
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("✓ Deposited: ₹" + amount);
+            System.out.println("  New Balance: ₹" + balance);
+        } else {
+            System.out.println("Deposit amount must be positive!");
+        }
+    }
+    
+    // Method to withdraw money
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("✓ Withdrawn: ₹" + amount);
+            System.out.println("  New Balance: ₹" + balance);
+        } else if (amount > balance) {
+            System.out.println("Insufficient balance! Your balance is ₹" + balance);
+        } else {
+            System.out.println("Withdrawal amount must be positive!");
+        }
+    }
+    
+    // Abstract method - Abstraction
+    // Each subclass must implement this method
+    public abstract double calculateInterest();
+    
+    // Method to display account details
+    public void displayAccountDetails() {
+        System.out.println("\n========== ACCOUNT DETAILS ==========");
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Account Holder: " + accountHolderName);
+        System.out.println("Balance: ₹" + balance);
+    }
+}
+
+*BankManagement.java*
+public class BankManagementSystem {
+    
+    public static void main(String[] args) {
+        
+        System.out.println("\n╔════════════════════════════════════════════════╗");
+        System.out.println("║    BANK MANAGEMENT SYSTEM - OOP CONCEPTS       ║");
+        System.out.println("╚════════════════════════════════════════════════╝");
+        
+        // Step 1: Create a SavingsAccount object
+        System.out.println("\n\n--- CREATING SAVINGS ACCOUNT ---");
+        SavingsAccount savingsAccount = new SavingsAccount("SA001", "Raj Kumar", 50000.0);
+        savingsAccount.displayAccountDetails();
+        
+        // Step 2: Perform operations on Savings Account
+        System.out.println("\n--- SAVINGS ACCOUNT OPERATIONS ---");
+        savingsAccount.deposit(10000);
+        System.out.println();
+        savingsAccount.withdraw(5000);
+        System.out.println();
+        savingsAccount.addInterest();
+        
+        // Display updated details
+        System.out.println();
+        savingsAccount.displayAccountDetails();
+        
+        
+        // Step 3: Create a CurrentAccount object
+        System.out.println("\n\n--- CREATING CURRENT ACCOUNT ---");
+        CurrentAccount currentAccount = new CurrentAccount("CA001", "Priya Singh", 100000.0);
+        currentAccount.displayAccountDetails();
+        
+        // Step 4: Perform operations on Current Account
+        System.out.println("\n--- CURRENT ACCOUNT OPERATIONS ---");
+        currentAccount.deposit(25000);
+        System.out.println();
+        currentAccount.withdraw(15000);
+        System.out.println();
+        currentAccount.addInterest();
+        System.out.println();
+        currentAccount.deductMonthlyCharges();
+        
+        // Display updated details
+        System.out.println();
+        currentAccount.displayAccountDetails();
+        
+        
+        // Step 5: Demonstrate Encapsulation - Using getters and setters
+        System.out.println("\n\n--- DEMONSTRATING ENCAPSULATION ---");
+        System.out.println("Savings Account Holder: " + savingsAccount.getAccountHolderName());
+        System.out.println("Current Balance: " + savingsAccount.getBalance());
+        System.out.println("Savings Interest Rate: 4%");
+        System.out.println();
+        System.out.println("Current Account Holder: " + currentAccount.getAccountHolderName());
+        System.out.println("Current Balance: " + currentAccount.getBalance());
+        System.out.println("Current Interest Rate: 2%");
+        
+        
+        // Step 6: Demonstrate Abstraction - Abstract method implementation
+        System.out.println("\n\n--- DEMONSTRATING ABSTRACTION ---");
+        System.out.println("SavingsAccount Interest (Abstract method implementation):");
+        System.out.println("  Annual Interest: " + savingsAccount.calculateInterest());
+        System.out.println();
+        System.out.println("CurrentAccount Interest (Abstract method implementation):");
+        System.out.println("  Annual Interest: " + currentAccount.calculateInterest());
+        
+        
+        // Step 7: Demonstrate Inheritance
+        System.out.println("\n\n--- DEMONSTRATING INHERITANCE ---");
+        System.out.println("Both SavingsAccount and CurrentAccount inherit from BankAccount");
+        System.out.println("They use inherited methods: deposit(), withdraw(), displayAccountDetails()");
+        System.out.println();
+        System.out.println("SavingsAccount is-a BankAccount: " + (savingsAccount instanceof BankAccount));
+        System.out.println("CurrentAccount is-a BankAccount: " + (currentAccount instanceof BankAccount));
+        
+        
+        // Final Summary
+        System.out.println("\n\n╔════════════════════════════════════════════════╗");
+        System.out.println("║              FINAL ACCOUNT SUMMARY              ║");
+        System.out.println("╚════════════════════════════════════════════════╝");
+        
+        savingsAccount.displayAccountDetails();
+        currentAccount.displayAccountDetails();
+        
+        System.out.println("\n Program completed successfully!");
+        System.out.println("\nOOP CONCEPTS DEMONSTRATED:");
+        System.out.println("  1. Encapsulation: Private variables with getter/setter methods");
+        System.out.println("  2. Inheritance: SavingsAccount and CurrentAccount extend BankAccount");
+        System.out.println("  3. Abstraction: calculateInterest() abstract method implemented in subclasses");
+        System.out.println("\n");
+    }
+}
+
+
+*CurrentAccount.java*
+// CurrentAccount class - Inheritance
+// Extends BankAccount and implements calculateInterest()
+
+public class CurrentAccount extends BankAccount {
+    
+    private static final double INTEREST_RATE = 0.02; // 2% annual interest rate
+    private double monthlyCharges = 100.0; // Monthly service charge
+    
+    // Constructor
+    public CurrentAccount(String accountNumber, String accountHolderName, double initialBalance) {
+        super(accountNumber, accountHolderName, initialBalance);
+    }
+    
+    // Implementation of abstract method calculateInterest()
+    @Override
+    public double calculateInterest() {
+        double interest = getBalance() * INTEREST_RATE;
+        return interest;
+    }
+    
+    // Method to deduct monthly charges
+    public void deductMonthlyCharges() {
+        withdraw(monthlyCharges);
+        System.out.println("✓ Monthly Charges Deducted: ₹" + monthlyCharges);
+    }
+    
+    // Method to add interest to the account
+    public void addInterest() {
+        double interest = calculateInterest();
+        deposit(interest);
+        System.out.println("✓ Interest Added: ₹" + interest);
+    }
+    
+    // Getter for monthly charges
+    public double getMonthlyCharges() {
+        return monthlyCharges;
+    }
+    
+    // Setter for monthly charges
+    public void setMonthlyCharges(double charges) {
+        this.monthlyCharges = charges;
+    }
+    
+    // Override displayAccountDetails to show account type
+    @Override
+    public void displayAccountDetails() {
+        super.displayAccountDetails();
+        System.out.println("Account Type: Current Account");
+        System.out.println("Interest Rate: " + (INTEREST_RATE * 100) + "%");
+        System.out.println("Annual Interest: ₹" + calculateInterest());
+        System.out.println("Monthly Charges: ₹" + monthlyCharges);
+        System.out.println("=====================================");
+    }
+}
+
+*SavingsAccount.java*
+// SavingsAccount class - Inheritance
+// Extends BankAccount and implements calculateInterest()
+
+public class SavingsAccount extends BankAccount {
+    
+    private static final double INTEREST_RATE = 0.04; // 4% annual interest rate
+    
+    // Constructor
+    public SavingsAccount(String accountNumber, String accountHolderName, double initialBalance) {
+        super(accountNumber, accountHolderName, initialBalance);
+    }
+    
+    // Implementation of abstract method calculateInterest()
+    @Override
+    public double calculateInterest() {
+        double interest = getBalance() * INTEREST_RATE;
+        return interest;
+    }
+    
+    // Method to add interest to the account
+    public void addInterest() {
+        double interest = calculateInterest();
+        deposit(interest);
+        System.out.println("✓ Interest Added: ₹" + interest);
+    }
+    
+    // Override displayAccountDetails to show account type
+    @Override
+    public void displayAccountDetails() {
+        super.displayAccountDetails();
+        System.out.println("Account Type: Savings Account");
+        System.out.println("Interest Rate: " + (INTEREST_RATE * 100) + "%");
+        System.out.println("Annual Interest: ₹" + calculateInterest());
+        System.out.println("=====================================");
+    }
+}
